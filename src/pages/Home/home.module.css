@@ -1,0 +1,71 @@
+.app{
+    background-color: rgb(14, 3, 11);
+    width: 100vw;
+    text-align: center;
+    padding-top: 70px;
+    padding-bottom: 70px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    place-items: center;
+}
+.modoClaro {
+ background-color: rgb(255, 255, 255);
+ color: black;
+}
+
+/* .modoOscuro .app{
+    background-color: rgb(74, 10, 57);
+    color: rgb(255, 255, 255);
+} */
+.modos{
+    position: absolute;
+    right: 15px;
+    top: 60px;
+    border-radius: 50%;
+}
+
+.libros{
+    
+    min-height: 100vh;
+    width: 90vw;
+    display: grid;
+    grid-template-columns: 
+    repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+    gap: 30px;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    max-width: 900px;
+}
+.libro{
+  width: 90%;
+  height: 100%;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  max-height: 350px;
+  
+}
+.libroimg{
+    height: 280px;
+    filter: drop-shadow(0px 0px 25px rgb(60, 12, 47));
+}
+
+.libroinfo{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.933);
+    color: rgb(255, 255, 255);
+    height: 100%;
+    width: 100%;
+    max-height: 350px;
+    max-width: 300px;
+    padding: 25px;
+    box-shadow: 0px 0px 25px rgb(60, 12, 47);
+}
+
+.paginacion{
+    margin-top: 35px;
+} 
