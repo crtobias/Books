@@ -8,25 +8,33 @@
     flex-direction: column;
     gap: 15px;
     place-items: center;
+    color: aliceblue;
+}
+.app input {
+    background-color: #00001b;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+.app select {
+    background-color: #00001b;
+    color: white;
+    border: 1px solid white;
+    border-radius: 5px;
 }
 .modoClaro {
- background-color: rgb(255, 255, 255);
+ background-color: rgb(145, 145, 145);
  color: black;
 }
 
-/* .modoOscuro .app{
-    background-color: rgb(74, 10, 57);
-    color: rgb(255, 255, 255);
-} */
 .modos{
     position: absolute;
     right: 15px;
-    top: 60px;
+    top: 100px;
     border-radius: 50%;
 }
 
 .libros{
-    
     min-height: 100vh;
     width: 90vw;
     display: grid;
@@ -36,6 +44,7 @@
     margin-left: 5vw;
     margin-right: 5vw;
     max-width: 900px;
+    place-items: center;
 }
 .libro{
   width: 90%;
@@ -46,26 +55,64 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  max-height: 350px;
-  
+  max-height: 360px;
+  border-radius: 10px;
+  max-width: 300px;
 }
 .libroimg{
-    height: 280px;
-    filter: drop-shadow(0px 0px 25px rgb(60, 12, 47));
+    max-height: 300px;
+    object-fit: initial;
+    width: 100%;
 }
 
 .libroinfo{
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.933);
+    background-color: rgba(0, 0, 0, 0.831);
     color: rgb(255, 255, 255);
     height: 100%;
     width: 100%;
-    max-height: 350px;
-    max-width: 300px;
-    padding: 25px;
-    box-shadow: 0px 0px 25px rgb(60, 12, 47);
+    border-radius: 10px;
+    z-index: 100;
+    object-fit: initial;
+    top: 0px;
+    padding-top: 25%;
 }
 
 .paginacion{
     margin-top: 35px;
+    display: flex;
+    gap: 1rem;
+    text-align: center;
 } 
+.filtros{
+    background-color: rgba(250, 235, 215, 0);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.title{
+    font-family: 'letra', sans-serif;
+    top: 70px;
+    left: 25px;
+    position: absolute;
+    font-size: 2rem;
+}
+
+@media (min-width: 1200px) {
+    .title {
+        top: 70px;
+        left: 350px;
+        position: absolute;
+        font-size: 2rem;
+    }
+    .filtros{
+        background-color: rgba(250, 235, 215, 0);
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+    }
+    .reset{
+        margin-left: 15px;
+    }
+}

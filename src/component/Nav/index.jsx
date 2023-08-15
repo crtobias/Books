@@ -1,53 +1,11 @@
-// import { useState } from "react";
+
 import styles from "./nav.module.css"
 
-// export const Nav = () => {
-
-//   const [modoNav, setModoNav] = useState(true);
-//   const toggleModo = () => {
-//     setModoNav((prevState) => !prevState); // Cambia el estado entre verdadero y falso (modo claro y oscuro)
-//   };
-
-
-
-//   return (
-  
-//     <section className={styles.navcontainer}>
-
-
-//       <div className={styles.navmobile}>
-        
-//         <h2 className={styles.navmobileboton} onClick={toggleModo}></h2>
-
-//         <div className={`${styles.navmobileInicial} ${modoNav ? styles.navmobileInicial : styles.modoActivo}`}>
-//           <h2 className={styles.navmobilebotonCerrar} onClick={toggleModo}></h2>
-//           <div className={styles.navmobilebutons}>
-//             <p>Libros</p> <br />
-//             <p>Home</p> <br />
-//             <p>Favoritos</p> <br />
-//           </div>
-//         </div>
-
-//       </div>
-
-
-
-
-//       <div className={styles.navdesktop}>
-//         <p>Libros</p>
-//         <p>Home</p>
-//         <p>Favoritos</p>
-//       </div>
-
-
-
-//     </section>
-//   )
-// }
 
 import React from "react";
 import {NavbarMenu,NavbarMenuToggle,Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button} from "@nextui-org/react";
-
+import {Avatar} from "@nextui-org/react"
+import { book, foto } from "../../assets";
 
 export  const Nav=()=> {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -72,14 +30,14 @@ export  const Nav=()=> {
       onMenuOpenChange={setIsMenuOpen}
       className={styles.nav}
     >
-      <NavbarContent className="sm:hidden" justify="start">
+      {/* <NavbarContent className="sm:hidden" justify="start">
         <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
-      </NavbarContent>
+      </NavbarContent> */}
 
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
           
-          <p className="font-bold text-inherit">ACME</p>
+          <p className="font-bold text-inherit">BookVerse</p>
         </NavbarBrand>
       </NavbarContent>
 
@@ -110,15 +68,13 @@ export  const Nav=()=> {
           <Link href="#">Login</Link>
         </NavbarItem>
         <NavbarItem>
-          <Button as={Link} color="warning" href="#" variant="flat">
-            Sign Up
-          </Button>
+        <Avatar isBordered color="primary" src={book} />
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarMenu className={styles.menu}>
+      {/* <NavbarMenu className={styles.menu}>
         <h2>hola</h2>
-      </NavbarMenu>
+      </NavbarMenu> */}
     </Navbar>
   );
 }

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import styles from "./home.module.css";
 import { books } from "../../assets";
-import { Accordion , AccordionItem } from "@nextui-org/react" ; 
+import { Switch } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
+import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 export const Home = () => {
     const [modoClaro, setModoClaro] = useState(true);
     const [generoFiltro, setGeneroFiltro] = useState("todos");
@@ -40,16 +42,23 @@ export const Home = () => {
 
     return (
         <div
-            className={`${styles.app} ${
-                modoClaro ? styles.modoClaro : styles.modoOscuro
-            }`}
+            className={`${styles.app} ${modoClaro ? styles.modoClaro : styles.modoOscuro
+                }`}
         >
-            <h1>Libreria</h1>
-            <button className={styles.modos} onClick={toggleModo}>
-                ♦
-            </button>
+            <h1 className={styles.title}>BookVerse</h1>
+            <Switch
+                className={styles.modos}
+                defaultSelected
+                size="lg"
+                color="success"
+                startContent={<p>🌞</p>}
+                endContent={<p>🌙</p>}
+                onClick={toggleModo}
+            >
+                <p className={styles.switch}></p>
+            </Switch>
 
-            <div>
+            <div className={styles.filtros}>
                 <div>
                     <label htmlFor="genero">Selecciona un género</label>
                     <select
@@ -75,23 +84,34 @@ export const Home = () => {
                         max="5000"
                         value={minPaginasFiltro}
                         onChange={(e) => setMinPaginasFiltro(parseInt(e.target.value))}
-                    /> 
-                    <br />
-                    <button onClick={resetFiltros}>Reiniciar Filtros</button>
+                    />
+                    
+                    
                 </div>
+                <Button  color="primary" variant="ghost" className={styles.reset} onClick={resetFiltros} >
+                    reset
+                </Button>
+               
             </div>
 
             <div className={styles.libros}>
                 {librosAMostrar.map((libro, index) => (
-                    <div key={index} className={styles.libro} onClick={() => handleLibroClick(index)}>
-                        <img
-                            className={styles.libroimg}
-                            src={libro.book.cover}
-                            alt=""
-                        />
-                        <h3>{libro.book.title}</h3>
-                        <h3>{libro.book.genre}</h3>
 
+                    <Card key={index} className={styles.libro} onClick={() => handleLibroClick(index)} shadow="sm" isPressable onPress={() => console.log("item pressed")}>
+                        <CardBody className="overflow-visible p-0">
+                            <Image
+                                className={styles.libroimg}
+                                shadow="sm"
+                                radius="lg"
+                                width="100%"
+                                alt={libro.book.title}
+                                src={libro.book.cover}
+                            />
+                        </CardBody>
+                        <CardFooter className="text-small justify-between">
+                            <b>{libro.book.title}</b>
+                            <p className="text-default-500">{libro.book.pages}</p>
+                        </CardFooter>
                         {libroSeleccionado === index && (
                             <div className={styles.libroinfo}>
                                 <p>Detalles adicionales del libro:</p>
@@ -100,24 +120,26 @@ export const Home = () => {
                                 <p>Fecha: {libro.book.year}</p>
                             </div>
                         )}
-                    </div>
+                    </Card>
+
+
+
                 ))}
             </div>
 
             <div className={styles.paginacion}>
-                <button
-                    onClick={() => setCurrentPage(currentPage - 1)}
-                    disabled={currentPage === 1}
-                >
-                    Anterior
-                </button>
+
+                <Button color="primary" onClick={() => setCurrentPage(currentPage - 1)}
+                    disabled={currentPage === 1}>
+                    anterior
+                </Button>
+
                 <span>Página {currentPage}</span>
-                <button
-                    onClick={() => setCurrentPage(currentPage + 1)}
-                    disabled={endIndex >= filteredLibros.length}
-                >
-                    Siguiente
-                </button>
+
+                <Button color="primary" onClick={() => setCurrentPage(currentPage + 1)}
+                    disabled={endIndex >= filteredLibros.length}>
+                    siguiente
+                </Button>
             </div>
         </div>
     );

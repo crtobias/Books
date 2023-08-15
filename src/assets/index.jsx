@@ -1,2 +1,5 @@
 // export { default as git } from "./git.svg"
 export { default as books } from "./books.json"
+export { default as foto } from "./FOTO.png"
+export { default as book } from "./book.png"
+export { default as letra } from "./letra.ttf"
