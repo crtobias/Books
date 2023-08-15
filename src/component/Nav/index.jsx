@@ -30,14 +30,12 @@ export  const Nav=()=> {
       onMenuOpenChange={setIsMenuOpen}
       className={styles.nav}
     >
-      {/* <NavbarContent className="sm:hidden" justify="start">
-        <NavbarMenuToggle aria-label={isMenuOpen ? "Close menu" : "Open menu"} />
-      </NavbarContent> */}
+      
 
       <NavbarContent className="sm:hidden pr-3" justify="center">
         <NavbarBrand>
           
-          <p className="font-bold text-inherit">BookVerse</p>
+        <h1 className={styles.title}>BookVerse</h1>
         </NavbarBrand>
       </NavbarContent>
 
@@ -72,9 +70,7 @@ export  const Nav=()=> {
         </NavbarItem>
       </NavbarContent>
 
-      {/* <NavbarMenu className={styles.menu}>
-        <h2>hola</h2>
-      </NavbarMenu> */}
+      
     </Navbar>
   );
 }

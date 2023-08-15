@@ -10,7 +10,9 @@ export const Home = () => {
     const [minPaginasFiltro, setMinPaginasFiltro] = useState(1);
     const [libroSeleccionado, setLibroSeleccionado] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
-    const librosPorPagina = 6; // Cantidad de libros por página
+    const librosPorPagina = 6;
+    const [librosSeleccionados, setLibrosSeleccionados] = useState([]);
+    const [mostrarLista, setMostrarLista] = useState(false);
 
     const toggleModo = () => {
         setModoClaro((prevState) => !prevState);
@@ -40,12 +42,25 @@ export const Home = () => {
         setLibroSeleccionado(index === libroSeleccionado ? null : index);
     };
 
+
+    const handleAgregarClick = (index) => {
+        const libroActual = librosAMostrar[index];
+        if (libroSeleccionado === index) {
+            setLibrosSeleccionados(librosSeleccionados.filter(libro => libro !== libroActual));
+        } else {
+            setLibrosSeleccionados([...librosSeleccionados, libroActual]);
+        }
+
+        console.log(librosSeleccionados);
+    };
+
+
     return (
         <div
             className={`${styles.app} ${modoClaro ? styles.modoClaro : styles.modoOscuro
                 }`}
         >
-            <h1 className={styles.title}>BookVerse</h1>
+            <h1 className={styles.title}></h1>
             <Switch
                 className={styles.modos}
                 defaultSelected
@@ -85,21 +100,22 @@ export const Home = () => {
                         value={minPaginasFiltro}
                         onChange={(e) => setMinPaginasFiltro(parseInt(e.target.value))}
                     />
-                    
-                    
+
+
                 </div>
-                <Button  color="primary" variant="ghost" className={styles.reset} onClick={resetFiltros} >
+                <Button color="primary" variant="ghost" className={styles.reset} onClick={resetFiltros} >
                     reset
                 </Button>
-               
+
             </div>
 
             <div className={styles.libros}>
                 {librosAMostrar.map((libro, index) => (
 
-                    <Card key={index} className={styles.libro} onClick={() => handleLibroClick(index)} shadow="sm" isPressable onPress={() => console.log("item pressed")}>
+                    <Card key={index} className={styles.libro} shadow="sm" isPressable>
                         <CardBody className="overflow-visible p-0">
                             <Image
+                                onClick={() => handleLibroClick(index)}
                                 className={styles.libroimg}
                                 shadow="sm"
                                 radius="lg"
@@ -107,13 +123,19 @@ export const Home = () => {
                                 alt={libro.book.title}
                                 src={libro.book.cover}
                             />
+
                         </CardBody>
                         <CardFooter className="text-small justify-between">
+
+
                             <b>{libro.book.title}</b>
                             <p className="text-default-500">{libro.book.pages}</p>
+                            <br />
+                            <button onClick={() => handleAgregarClick(index)}>⭐</button>
                         </CardFooter>
                         {libroSeleccionado === index && (
                             <div className={styles.libroinfo}>
+                                <button onClick={() => handleLibroClick(index)}>X</button>
                                 <p>Detalles adicionales del libro:</p>
                                 <p>Autor: {libro.book.author.name}</p>
                                 <p>Descripción: {libro.book.synopsis}</p>
@@ -134,13 +156,68 @@ export const Home = () => {
                     anterior
                 </Button>
 
-                <span>Página {currentPage}</span>
+                <button className={styles}>Página {currentPage}</button>
 
                 <Button color="primary" onClick={() => setCurrentPage(currentPage + 1)}
                     disabled={endIndex >= filteredLibros.length}>
                     siguiente
                 </Button>
             </div>
+            
+            {mostrarLista && (
+                <div className={styles.listaLibrosSeleccionados}>
+                    <h1 className={styles.librosselece}>Lista de lectura</h1>
+                    {librosSeleccionados.map((libro, index) => (
+                        
+                          <Card key={index} className={styles.libro} shadow="sm" isPressable>
+                            
+                          <CardBody className="overflow-visible p-0">
+                              <Image
+                                  onClick={() => handleLibroClick(index)}
+                                  className={styles.libroimg}
+                                  shadow="sm"
+                                  radius="lg"
+                                  width="100%"
+                                  alt={libro.book.title}
+                                  src={libro.book.cover}
+                              />
+  
+                          </CardBody>
+                          <CardFooter className="text-small justify-between">
+  
+  
+                              <b>{libro.book.title}</b>
+                              <p className="text-default-500">{libro.book.pages}</p>
+                              <br />
+                              
+                          </CardFooter>
+                          {libroSeleccionado === index && (
+                              <div className={styles.libroinfo}>
+                                  <button onClick={() => handleLibroClick(index)}>X</button>
+                                  <p>Detalles adicionales del libro:</p>
+                                  <p>Autor: {libro.book.author.name}</p>
+                                  <p>Descripción: {libro.book.synopsis}</p>
+                                  <p>Fecha: {libro.book.year}</p>
+                              </div>
+                          )}
+                      </Card>
+                    ))}
+                    <Button
+                    className={styles.listacerrar}
+                color="primary"
+                onClick={() => setMostrarLista(!mostrarLista)}
+            >
+                x
+            </Button>
+                </div>
+                
+            )}
+            <button
+                className={styles.listamostrar}
+                onClick={() => setMostrarLista(!mostrarLista)}
+            >
+                ⭐
+            </button>
         </div>
     );
 };

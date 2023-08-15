@@ -13,3 +13,8 @@
     z-index: 10000;
     opacity: 90%;
 }
+
+.title{
+    font-family: 'letra', sans-serif;
+    font-size: 2rem;
+}
